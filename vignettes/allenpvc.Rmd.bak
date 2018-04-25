@@ -1,0 +1,122 @@
+---
+title: "Overview of the allenpvc data set"
+author: "Diogo P. P. Branco"
+date: "`r Sys.Date()`"
+output: BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r style, echo=FALSE, results='asis'}
+BiocStyle::markdown()
+```
+
+<!--
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE,
+  comment="##"
+)
+```
+-->
+
+# Introduction
+
+The `allenpvc` data set is the supplementary data of
+[GSE71585](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE71585)
+encapsulated in a `SingleCellExperiment` object. It is a celular taxonomy of the
+primary visual cortex in adult mice based on single cell RNA-sequencing from
+[Tasic et al. 2016](https://www.nature.com/articles/nn.4216)
+performed by the Allen Institute for Brain Science. In said study 49
+transcriptomic cell types are identified.
+
+# Pre-processing and summary
+
+The supplementary files were downloaded from the NCBI website. Those are _csv_
+files with count, RPKM, and TPM gene expression data for each cell. They were
+processed using R and were encapsulated in a `SingleCellExperiment` (SCE) data.
+
+The original data had a small cell name mis-formatting that was easily
+corrected. Lastly, the expression for spike-in genes were available only in
+RPKM and counts, but not in TPM. Since this information was included in the SCE,
+the expression for those genes in the TPM matrix were filled with NAs.
+
+# Data format and metadata
+
+This data set can be downloaded from the ExperimentHub.
+
+```{r load_eh, eval=FALSE}
+library(ExperimentHub)
+eh <- ExperimentHub()
+query(eh, "allenpvc")
+allenpvc <- eh[["allenpvc"]]
+allenpvc
+```
+
+```{r load_test, echo=FALSE}
+load("../allenpvc.rda")
+allenpvc
+```
+
+The gene expression data can be retrieved using the `assay` construct. The
+chunk below retrieves the count matrix, if you wish to retrieve the RPKM or the
+TPM matrix just replace the `"counts"` argument of `assay` with `"rpkm"` or
+`"tpm"`.
+
+```{r get_assay}
+head(assay(allenpvc, "counts")[, 1:5])
+```
+
+This data set also contains some important metadata, including cell type
+annotation of the samples and whether they passed the QC check performed in
+[Tasic et al.](https://www.nature.com/articles/nn.4216). As well as many other
+useful information such as the Cre line driver and the neuron broad type.
+
+```{r coldata}
+head(colData(allenpvc))
+```
+
+Primary (cell) type of the first 20 cells.
+
+```{r primary_type}
+head(allenpvc$primary_type, 20)
+```
+
+Broad type of the first 20 cells.
+
+```{r broad_type}
+head(allenpvc$broad_type, 20)
+```
+
+Any metadata information can be accessed through the `$` operator
+directly from the SCE object. But in the chunk below we are subsetting more than
+one column, thus, we must reference `colData`. The output shows the Cre line and
+QC check flag of some cells.
+
+```{r cre_qc}
+head(colData(allenpvc)[, c("cre_driver_1", "pass_qc_checks")])
+```
+
+# Spike-in genes
+
+This data set has information on the expression of spike-in genes. In the study
+ERCC spike-ins were used as well as the tdTomato. These genes are included in
+the same matrices as the endogenous genes, hence, it might be desirable to split
+the assay matrix.
+
+The chunk below shows an example of splitting the count matrix. As previously
+mentioned, the spike-in expression for TPM is not available in the original
+supplementary data and, for said assay, is filled with NAs.
+```{r spike_in}
+allenpvc_endo <- allenpvc[!isSpike(allenpvc),]
+allenpvc_endo
+allenpvc_spike <- allenpvc[isSpike(allenpvc),]
+allenpvc_spike
+```
+
+# References
+
+Tasic, Bosiljka, et al. "Adult mouse cortical cell taxonomy revealed by single
+cell transcriptomics." Nature neuroscience 19.2 (2016): 335.

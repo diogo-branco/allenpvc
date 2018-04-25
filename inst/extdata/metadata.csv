@@ -1,0 +1,5 @@
+"Title","Description","BiocVersion","Genome","SourceType","SourceUrl","SourceVersion","Species","TaxonomyId","Coordinate_1_based","DataProvider","Maintainer","RDataClass","DispatchClass","RDataPath"
+"GEO accession data GSE71585 as a SingleCellExperiment","Celular taxonomy of the primary visual cortex in adult mice
+        based on single cell RNA-sequencing from a study performed by the Allen
+        Institute for Brain Science. In said study 49 transcriptomic cell types
+        are identified.","3.6","mm10",".csv.gz","https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE71585","Jan 04 2016","Mus musculus","10090",TRUE,"GEO","Diogo P. P. Branco <diogo.pp.branco@gmail.com>","SingleCellExperiment","Rda","allenpvc/allenpvc.rda"
