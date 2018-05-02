@@ -2,11 +2,8 @@
 
 meta <- data.frame(
     Title="GEO accession data GSE71585 as a SingleCellExperiment",
-    Description="Celular taxonomy of the primary visual cortex in adult mice
-        based on single cell RNA-sequencing from a study performed by the Allen
-        Institute for Brain Science. In said study 49 transcriptomic cell types
-        are identified.",
-    BiocVersion="3.6",
+    Description="Celular taxonomy of the primary visual cortex in adult mice based on single cell RNA-sequencing from a study performed by the Allen Institute for Brain Science. In said study 49 transcriptomic cell types are identified.",
+    BiocVersion="3.8",
     Genome="mm10",
     SourceType=".csv.gz",
     SourceUrl="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE71585",
