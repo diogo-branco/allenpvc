@@ -6,10 +6,10 @@ Description: Celular taxonomy of the primary visual cortex in adult mice based
     on single cell RNA-sequencing from a study performed by the Allen Institute
     for Brain Science. In said study 49 transcriptomic cell types are
     identified.
-Depends: R (>= 3.4.4), GEOquery, SingleCellExperiment
+Depends: R (>= 3.5.0), GEOquery, SingleCellExperiment
 License: CC0
 Encoding: UTF-8
-biocViews: ExperimentData, ExpressionData, SequencingData, RNASeqData
+biocViews: ExperimentData, ExpressionData, SingleCellData, RNASeqData
 Suggests: knitr,
     rmarkdown,
     BiocStyle
