@@ -39,11 +39,8 @@ the expression for those genes in the TPM matrix were filled with NAs.
 This data set can be downloaded from the ExperimentHub.
 
 ```{r load_eh}
-library(ExperimentHub)
-eh <- ExperimentHub()
-query(eh, "allenpvc")
-allenpvc <- eh[["EH1433"]]
-allenpvc
+library(allenpvc)
+apvc <- allenpvc()
 ```
 
 The gene expression data can be retrieved using the `assay` construct. The
@@ -52,7 +49,7 @@ TPM matrix just replace the `"counts"` argument of `assay` with `"rpkm"` or
 `"tpm"`.
 
 ```{r get_assay}
-head(assay(allenpvc, "counts")[, 1:5])
+head(assay(apvc, "counts")[, 1:5])
 ```
 
 This data set also contains some important metadata, including cell type
@@ -61,19 +58,19 @@ annotation of the samples and whether they passed the QC check performed in
 useful information such as the Cre line driver and the neuron broad type.
 
 ```{r coldata}
-head(colData(allenpvc))
+head(colData(apvc))
 ```
 
 Primary (cell) type of the first 20 cells.
 
 ```{r primary_type}
-head(allenpvc$primary_type, 20)
+head(apvc$primary_type, 20)
 ```
 
 Broad type of the first 20 cells.
 
 ```{r broad_type}
-head(allenpvc$broad_type, 20)
+head(apvc$broad_type, 20)
 ```
 
 Any metadata information can be accessed through the `$` operator
@@ -82,7 +79,7 @@ one column, thus, we must reference `colData`. The output shows the Cre line and
 QC check flag of some cells.
 
 ```{r cre_qc}
-head(colData(allenpvc)[, c("cre_driver_1", "pass_qc_checks")])
+head(colData(apvc)[, c("cre_driver_1", "pass_qc_checks")])
 ```
 
 # Spike-in genes
@@ -96,10 +93,10 @@ The chunk below shows an example of splitting the count matrix. As previously
 mentioned, the spike-in expression for TPM is not available in the original
 supplementary data and, for said assay, is filled with NAs.
 ```{r spike_in}
-allenpvc_endo <- allenpvc[!isSpike(allenpvc),]
-allenpvc_endo
-allenpvc_spike <- allenpvc[isSpike(allenpvc),]
-allenpvc_spike
+apvc_endo <- apvc[!isSpike(apvc),]
+apvc_endo
+apvc_spike <- apvc[isSpike(apvc),]
+apvc_spike
 ```
 
 # References

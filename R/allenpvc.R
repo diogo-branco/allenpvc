@@ -1,0 +1,36 @@
+
+#' Adult mouse cortical cell taxonomy by single cell transcriptomics
+#'
+#' Celular taxonomy of the primary visual cortex in adult mice based on single
+#' cell RNA-sequencing from a study performed by the Allen Institute for Brain
+#' Science. In said study 49 transcriptomic cell types are identified.
+#' This data set is the supplementary data from GEO accession
+#' \href{https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE71585}{GSE71585}
+#' encapsulated in a \code{\link[SingleCellExperiment]{SingleCellExperiment}}.
+#'
+#' See the vignette for examples of using these data in differential gene
+#' expression analysis.
+#'
+#' browseVignettes("allenpvc")
+#'
+#' Details of how this data was created are in the inst/scripts/ directory of
+#' the source package.
+#'
+#' @format The data is encapsulated in a
+#' \code{\link[SingleCellExperiment]{SingleCellExperiment}} object available
+#' through \code{\link[ExperimentHub]{ExperimentHub}}
+#' @source https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE71585
+#' @import AnnotationHub
+#' @import ExperimentHub
+#' @import SingleCellExperiment
+#' @examples
+#' allenpvc()
+#' @references Tasic, Bosiljka, et al. Adult mouse cortical cell taxonomy
+#'     revealed by single cell transcriptomics. Nature neuroscience 19.2 (2016):
+#'     335.
+#' @export
+allenpvc <- function() {
+    eh <- ExperimentHub()
+    query(eh, "allenpvc")
+    return(eh[["EH1433"]])
+}
