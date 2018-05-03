@@ -42,7 +42,7 @@ This data set can be downloaded from the ExperimentHub.
 library(ExperimentHub)
 eh <- ExperimentHub()
 query(eh, "allenpvc")
-allenpvc <- eh[["allenpvc"]]
+allenpvc <- eh[["EH1433"]]
 allenpvc
 ```
 
