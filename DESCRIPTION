@@ -12,7 +12,7 @@ Description: Celular taxonomy of the primary visual cortex in adult mice based
 License: CC0
 NeedsCompilation: no
 Depends: R (>= 3.5.0), GEOquery, SingleCellExperiment
-Suggests: BiocStyle, ExperimentHub, knitr
+Suggests: BiocStyle, ExperimentHub, knitr, rmarkdown
 VignetteBuilder: knitr
 Encoding: UTF-8
 biocViews: ExperimentData, ExpressionData, SingleCellData, RNASeqData
