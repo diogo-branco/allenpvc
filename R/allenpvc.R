@@ -31,6 +31,5 @@
 #' @export
 allenpvc <- function() {
     eh <- ExperimentHub()
-    query(eh, "allenpvc")
     return(eh[["EH1433"]])
 }

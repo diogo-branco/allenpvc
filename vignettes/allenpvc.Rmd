@@ -23,6 +23,14 @@ primary visual cortex in adult mice based on single cell RNA-sequencing from
 performed by the Allen Institute for Brain Science. In said study 49
 transcriptomic cell types are identified.
 
+# Installation
+
+The package can be installed using the chunk below.
+
+```{r install, eval=FALSE}
+BiocInstaller::biocLite("allenpvc")
+```
+
 # Pre-processing and summary
 
 The supplementary files were downloaded from the NCBI website. Those are _csv_
@@ -97,6 +105,12 @@ apvc_endo <- apvc[!isSpike(apvc),]
 apvc_endo
 apvc_spike <- apvc[isSpike(apvc),]
 apvc_spike
+```
+
+# sessionInfo()
+
+```{r sessioninfo, echo=FALSE}
+sessionInfo()
 ```
 
 # References
